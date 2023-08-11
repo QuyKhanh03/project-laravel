@@ -1,19 +1,18 @@
 <?php
 
-namespace App\Http\Controllers\BE;
+namespace App\Http\Controllers\FE;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
-class DashboardController extends Controller
+class HomeController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        return view('be.dashboard.index');
-
+        return view('fe.home.index');
     }
 
     /**

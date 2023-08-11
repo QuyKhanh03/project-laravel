@@ -19,7 +19,7 @@
     <title>Adara </title>
     <!-- Favicon icon -->
     <link rel="icon" type="image/png" sizes="16x16" href="{{ asset('templates/client/img/favicon.png') }}">
-    <link href="{{ asset('templates/admin/css/style.css') }}" rel="stylesheet">
+    <link href="{{ asset('templates/be/css/style.css') }}" rel="stylesheet">
 
 </head>
 <body class="vh-100">
@@ -32,10 +32,10 @@
     Scripts
 ***********************************-->
 <!-- Required vendors -->
-<script src="{{ asset('templates/admin/vendor/global/global.min.js') }}"></script>
-<script src="{{ asset('templates/admin/vendor/bootstrap-select/dist/js/bootstrap-select.min.js') }}"></script>
-<script src="{{ asset('templatess/admin/js/custom.min.js') }}"></script>
-<script src="{{ asset('templates/admin/js/deznav-init.js') }}"></script>
+<script src="{{ asset('templates/be/vendor/global/global.min.js') }}"></script>
+<script src="{{ asset('templates/be/vendor/bootstrap-select/dist/js/bootstrap-select.min.js') }}"></script>
+<script src="{{ asset('templatess/be/js/custom.min.js') }}"></script>
+<script src="{{ asset('templates/be/js/deznav-init.js') }}"></script>
 
 </body>
 

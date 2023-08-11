@@ -9,6 +9,8 @@ use App\Http\Controllers\BE\DashboardController;
 use App\Http\Controllers\BE\CategoryController;
 use App\Http\Controllers\BE\BrandController;
 use App\Http\Controllers\BE\ProductController;
+//fe
+use App\Http\Controllers\FE\HomeController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -20,9 +22,6 @@ use App\Http\Controllers\BE\ProductController;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
 
 //Auth
 Route::get('login', [AuthController::class, 'index'])->name('fe.auth.login');
@@ -30,7 +29,16 @@ Route::post('login', [AuthController::class, 'login'])->name('login');
 Route::get('/auth/redirect', [AuthController::class, 'redirectToGoogle'])->name('google.redirect');
 Route::get('/authorized/google/callback', [AuthController::class, 'handleGoogleCallback'])->name('google.callback');
 Route::post('logout', [AuthController::class, 'logout'])->name('logout');
-
+//FE
+Route::get('/', [HomeController::class, 'index'])->name('fe.home.index');
+Route::get('/danh-muc/{slug}', [App\Http\Controllers\FE\CategoryController::class, 'getProductBySlug'])->name('fe.category.getProductBySlug');
+Route::get('thuong-hieu/{slug}', [App\Http\Controllers\FE\BrandController::class, 'getProductBySlug'])->name('fe.brand.getProductBySlug');
+Route::get('san-pham/{slug}', [App\Http\Controllers\FE\ProductController::class, 'show'])->name('fe.product.show');
+//comment
+Route::post('add-comment', [App\Http\Controllers\FE\ProductController::class, 'storeComment'])->name('fe.comment.store');
+Route::get('get-comments/{id}', [App\Http\Controllers\FE\ProductController::class, 'getComments'])->name('fe.comment.getComments');
+//search
+Route::get('search', [App\Http\Controllers\FE\ProductController::class, 'search'])->name('fe.search.index');
 //BE
 Route::prefix('admin')
     ->middleware(['auth', 'checkAdmin'])
