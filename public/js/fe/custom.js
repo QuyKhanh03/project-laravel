@@ -25,7 +25,9 @@ $(document).ready(function () {
             $('#search-results').empty()
         }
     })
-
+    $('.filter').on('change', function(){
+        $('.form-filter').submit()
+    })
     $('body').on('click', '.btn-comment', function (e) {
         e.preventDefault();
         var content = $('.content').val();
@@ -99,4 +101,18 @@ $(document).ready(function () {
     }
 
     fetchComments();
+    $('.update-cart').change(function (e) {
+        e.preventDefault();
+        var ele = $(this);
+        console.log(ele);
+        $.ajax({
+            url : '/update-cart',
+            method : "get",
+            data : { key: ele.parents("tr").attr("data-id"), product_quantity: ele.parents("tr").find(".product_quantity").val()},
+            success: function (response) {
+                window.location.reload();
+            }
+        })
+    })
+
 })

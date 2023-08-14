@@ -67,8 +67,8 @@
                         @endif
 
                         <div class="perched-info" >
-                            <form action=""  id="form-cart" method="post">
-
+                            <form action="{{ route('client.cart.add') }}" id="form-cart" method="post">
+                                @csrf
                                 @if(count($attributes) > 0)
                                     <div class="sidebar-product-size mb-30">
                                         <h4 class="widget-title">Kích cỡ sản phẩm</h4>
@@ -79,13 +79,14 @@
                                             @endforeach
                                         </select>
                                         @error('attribute')
-                                        <div class="alert alert-danger">{{ $message }}</div>
+                                        <div class="mt-2 alert alert-danger">{{ $message }}</div>
                                         @enderror
                                     </div>
                                 @endif
-                                <label>
-                                    <input type="number" min="1" class="form-control" value="1" name="product_quantity">
-                                </label> <br>
+                                <input type="number" min="1" class="form-control" value="1" name="product_quantity"> <br>
+                                @error('product_quantity')
+                                    <div class="mt-2 alert alert-danger">{{ $message }}</div>
+                                @enderror
                                 <input type="hidden" value="{{ $product->id }}" name="product_id">
                                 <button type="submit" class="btn btn-cart bg-dark text-white mt-3 btn-add-to-cart">Thêm vào giỏ hàng</button>
                             </form>

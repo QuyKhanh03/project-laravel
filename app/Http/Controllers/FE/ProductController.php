@@ -15,9 +15,23 @@ class ProductController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
-    {
-        //
+    public function index(Request $request) {
+        if($request->filter) {
+            $filter = $request->filter;
+            if($filter == 'price_asc') {
+                $products = Product::query()->orderBy('price', 'asc')->paginate(8);
+
+            } else if($filter == 'price_desc') {
+                $products = Product::query()->orderBy('price', 'desc')->paginate(8);
+            } else if($filter == '') {
+                $products = Product::query()->paginate(12);
+            } else {
+                $products = Product::query()->where('brand_id', '=', $filter)->paginate(8);
+            }
+        } else {
+            $products = Product::query()->paginate(8);
+        }
+        return view('fe.product.index', compact('products'));
     }
     public function show(Request $request, string $slug)
     {

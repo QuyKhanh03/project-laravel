@@ -18,6 +18,7 @@ return new class extends Migration
             $table->unsignedBigInteger('product_id')->nullable();
             $table->foreign('product_id')->references('id')->on('products')->onDelete('cascade'); // 1 product có thể có nhiều order detail
             $table->integer('quantity')->nullable()->default(null);
+            $table->string('attribute')->nullable();
             $table->timestamps();
         });
     }

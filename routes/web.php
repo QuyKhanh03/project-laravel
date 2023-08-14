@@ -34,11 +34,24 @@ Route::get('/', [HomeController::class, 'index'])->name('fe.home.index');
 Route::get('/danh-muc/{slug}', [App\Http\Controllers\FE\CategoryController::class, 'getProductBySlug'])->name('fe.category.getProductBySlug');
 Route::get('thuong-hieu/{slug}', [App\Http\Controllers\FE\BrandController::class, 'getProductBySlug'])->name('fe.brand.getProductBySlug');
 Route::get('san-pham/{slug}', [App\Http\Controllers\FE\ProductController::class, 'show'])->name('fe.product.show');
+Route::get('san-pham', [App\Http\Controllers\FE\ProductController::class, 'index'])->name('fe.product.index');
 //comment
 Route::post('add-comment', [App\Http\Controllers\FE\ProductController::class, 'storeComment'])->name('fe.comment.store');
 Route::get('get-comments/{id}', [App\Http\Controllers\FE\ProductController::class, 'getComments'])->name('fe.comment.getComments');
 //search
 Route::get('search', [App\Http\Controllers\FE\ProductController::class, 'search'])->name('fe.search.index');
+
+Route::post('/add-cart', [App\Http\Controllers\FE\CartController::class, 'saveCartSession'])->name('client.cart.add');
+Route::get('/get-cart', [App\Http\Controllers\FE\CartController::class, 'getCartSession'])->name('client.cart.getCartSession');
+Route::get('/delete-cart/{key}', [App\Http\Controllers\FE\CartController::class, 'delCartbyKey'])->name('client.cart.deleteCartSession');
+Route::get('/update-cart', [App\Http\Controllers\FE\CartController::class, 'update'])->name('client.cart.updateCartSession');
+Route::get('/cart', [App\Http\Controllers\FE\CartController::class, 'index'])->name('client.cart.index');
+//checkout
+Route::get('/checkout', [App\Http\Controllers\FE\OrderController::class, 'index'])->name('client.order.index');
+Route::post('/checkout', [App\Http\Controllers\FE\OrderController::class, 'store'])->name('client.order.store');
+Route::post('/payment', [App\Http\Controllers\FE\OrderController::class, 'payment'])->name('client.order.payment');
+Route::get('/checkout-payment', [App\Http\Controllers\FE\OrderController::class, 'checkoutPayment'])->name('client.order.checkoutPayment');
+
 //BE
 Route::prefix('admin')
     ->middleware(['auth', 'checkAdmin'])

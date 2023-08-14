@@ -23,7 +23,7 @@
                                             <li class="active menu-item-has-children has--mega--menu"><a href="{{ route('fe.category.getProductBySlug',$category->slug) }}">{{ $category->name }}</a></li>
                                         @endforeach
 
-                                        <li class="menu-item-has-children"><a href="">Sản Phẩm</a>
+                                        <li class="menu-item-has-children"><a href="{{ route('fe.product.index') }}">Sản Phẩm</a>
 
 
                                             <ul class="submenu">
@@ -35,8 +35,6 @@
                                                     @endforeach
                                                 @endif
                                             </ul>
-
-
                                         </li>
                                         <li><a href="about-us.html">Hướng dẫn mua hàng</a></li>
 
@@ -46,35 +44,75 @@
                             <div class="header-action d-none d-md-block">
                                 <ul>
                                     <li class="header-search"><a href="#" data-toggle="modal" data-target="#search-modal" id="btn-search" ><i class="flaticon-search"></i></a></li>
-                                    <li class="header-shop-cart"><a href="#"><i class="flaticon-shopping-bag"></i><span>0</span></a>
+                                    @if(Session::has('cart') && count(Session::get('cart')) > 0)
+                                        @php
+                                            $count = 0;
+                                            $total = 0;
+                                        @endphp
+                                        @foreach(session()->get('cart') as $key => $value)
+                                            @php
+                                                $count ++;
+                                                $total += $value['product_price'] * $value['product_quantity'];
+                                            @endphp
+                                        @endforeach
+                                    @else
+                                        @php
+                                            $count = 0;
+                                            $total = 0;
+                                        @endphp
+                                    @endif
+                                    <li class="header-shop-cart shop-cart"><a href="{{ route('client.cart.index') }}"><i class="flaticon-shopping-bag"></i><span class="count-cart">{{ $count }}</span></a>
                                         <ul class="minicart">
-                                            <li class="d-flex align-items-start">
-                                                <div class="cart-img">
-                                                    <a href="#"><img src="" alt=""></a>
-                                                </div>
-                                                <div class="cart-content">
-                                                    <h4><a href="#">Exclusive Winter Jackets</a></h4>
-                                                    <div class="cart-price">
-                                                        <span class="new">$229.9</span>
-                                                        <span><del>$229.9</del></span>
+
+                                            @if(Session::has('cart') && count(Session::get('cart')) > 0)
+
+                                                @foreach(session()->get('cart') as $key => $value)
+                                                    @php
+                                                        $count ++;
+                                                    @endphp
+                                                    <li class="d-flex align-items-start">
+                                                        <div class="cart-img">
+                                                            <a href="#"><img src="{{ asset('storage/images/products/'.$value['product_image']) }}" alt=""></a>
+                                                        </div>
+                                                        <div class="cart-content">
+                                                            <h4><a href="#">{{ $value['product_name'] }}</a></h4>
+                                                            <div class="cart-price">
+                                                                <span class="new">{{ number_format($value['product_price'], 0, ',', '.') }} VNĐ</span>
+                                                            </div>
+
+                                                            <div class="cart-qty">
+                                                                <div class="product-qty">
+                                                                    <span>Size: {{ $value['attribute'] }} - </span>
+                                                                    <span>
+                                                                    Số lượng : {{ $value['product_quantity'] }}
+                                                                </span>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="del-icon">
+                                                            <a href="{{ route('client.cart.deleteCartSession',$value['key']) }}"><i class="far fa-trash-alt"></i></a>
+                                                        </div>
+
+                                                    </li>
+
+                                                @endforeach
+
+                                                <li>
+                                                    <div class="total-price">
+                                                        <span class="f-left">Tổng :</span>
+                                                        <span class="f-right">{{ number_format($total, 0, ',', '.') }} VNĐ</span>
                                                     </div>
-                                                </div>
-                                                <div class="del-icon">
-                                                    <a href="#"><i class="far fa-trash-alt"></i></a>
-                                                </div>
-                                            </li>
-                                            <li>
-                                                <div class="total-price">
-                                                    <span class="f-left">Total:</span>
-                                                    <span class="f-right">$239.9</span>
-                                                </div>
-                                            </li>
-                                            <li>
-                                                <div class="checkout-link">
-                                                    <a href="#">Shopping Cart</a>
-                                                    <a class="black-color" href="#">Checkout</a>
-                                                </div>
-                                            </li>
+                                                </li>
+                                                <li>
+                                                    <div class="checkout-link">
+                                                        <a href="{{ route('client.cart.index') }}">Giỏ hàng</a>
+                                                        <a class="black-color" href="{{ route('client.order.index') }}">Thanh toán</a>
+                                                    </div>
+                                                </li>
+
+                                            @else
+                                                <h5>Giỏ hàng trống !</h5>
+                                            @endif
                                         </ul>
                                     </li>
 

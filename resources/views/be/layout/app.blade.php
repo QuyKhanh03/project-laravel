@@ -58,7 +58,7 @@
         ***********************************-->
     <div class="nav-header">
         <a href="" class="brand-logo">
-            <img class="" style="width: 120px"  src="{{ asset('templates/client/img/logo/fw_logo.png') }}" alt="">
+            <img class="" style="width: 120px"  src="{{ asset('templates/fe/img/logo/fw_logo.png') }}" alt="">
         </a>
 
         <div class="nav-control">
@@ -81,7 +81,7 @@
                 <div class="collapse navbar-collapse justify-content-between">
                     <div class="header-left">
                         <div class="dashboard_bar">
-                            <img src="{{ asset('templates/client/img/logo/fw_logo.png') }}" alt="">
+                            <img src="{{ asset('templates/fe/img/logo/fw_logo.png') }}" alt="">
                         </div>
                     </div>
 
@@ -404,7 +404,7 @@
 <script src="{{ asset('templates/be/js/styleSwitcher.js') }}"></script>
 <!-- Thay thế {YOUR_API_KEY} bằng khóa API của bạn từ trang web TinyMCE -->
 <script src="https://cdn.tiny.cloud/1/gwhdtg51gzp1y2m3vnlek784pp7o91u2h0wkpv67qsvqqyv9/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
-<script src="{{ asset('assets/js/be/config.js') }}"></script>
+<script src="{{ asset('js/be/config.js') }}"></script>
 @yield('script')
 
 <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
