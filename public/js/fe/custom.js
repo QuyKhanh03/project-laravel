@@ -1,4 +1,5 @@
 $(document).ready(function () {
+
     $('#search').on('keyup', function(){
         var search = $(this).val();
         if(search.trim() !== "") {
@@ -114,5 +115,12 @@ $(document).ready(function () {
             }
         })
     })
-
+    $("#otherForm .address").change(function () {
+        var value = $(this).val();
+        $("#form-payment .address-payment").val(value)
+    });
+    $("#otherForm .phone").change(function () {
+        var value = $(this).val();
+        $("#form-payment .phone-payment").val(value)
+    });
 })

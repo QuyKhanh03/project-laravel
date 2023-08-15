@@ -132,7 +132,7 @@
             @else
 
                     <div class="container">
-                        <form action="{{ route('client.order.store') }}" method="post">
+                        <form action="{{ route('client.order.store') }}" method="post" id="otherForm">
                             @csrf
                         <div class="row justify-content-center">
                             <div class="col-lg-7">
@@ -164,7 +164,7 @@
                                             <div class="col-sm-6">
                                                 <div class="form-grp">
                                                     <label for="phone">Số điện thoại<span>*</span></label>
-                                                    <input type="text" id="phone" value="{{ old('phone') }}" name="phone">
+                                                    <input type="text" class="phone" id="phone" value="{{ old('phone') }}" name="phone">
                                                     @error('phone')
                                                     <span class="text-danger">{{ $message }}</span>
                                                     @enderror
@@ -173,7 +173,7 @@
                                             <div class="col-sm-6">
                                                 <div class="form-grp">
                                                     <label for="address">Địa chỉ<span>*</span></label>
-                                                    <input type="text" id="address" value="{{ old('address') }}" name="address">
+                                                    <input type="text" id="address" class="address" value="{{ old('address') }}" name="address">
                                                     @error('address')
                                                     <span class="text-danger">{{ $message }}</span>
                                                     @enderror
@@ -206,6 +206,8 @@
                                                         <input  name="payment_method" type="checkbox" value="Thanh toán khi nhận hàng" class="custom-control-input" id="customCheck5" >
                                                         <label class="custom-control-label" for="customCheck5">Thanh toán khi nhận hàng</label>
                                                     </div>
+                                                    <br>
+
                                                 </div>
                                             </div>
                                             @error('payment_method')
@@ -213,29 +215,29 @@
                                             @enderror
 
                                             <button class="btn mt-3 bg-dark text-white w-100">Đặt hàng</button>
-
-
                                         </div>
                                     </div>
                                 </aside>
                             </div>
                         </div>
                         </form>
-                        <form action="{{ route('client.order.payment') }}" method="post" style="width: 450px">
+                        <form action="{{ route('client.order.payment') }}" method="post" style="width: 450px" id="form-payment">
                             @php
                                 $code = 'DH'.rand(100000,999999);
                             @endphp
                             @csrf
+                            <input type="hidden" name="phone1" class="phone-payment" >
+                            <input type="hidden" name="address1" class="address-payment">
                             <input type="hidden" name="total" value="{{ $total }}">
                             <input type="hidden" name="order_code" value="{{ $code }}">
-                            <button name="redirect" style="width: 250px" type="submit" class="btn  mt-3 bg-dark text-white w-100">Thanh toán VNPay</button>
+                            <button name="redirect"  class="btn bg-dark text-white" id="payment-vnp" type="submit" >Thanh toán VNPay</button>
                         </form>
                     </div>
-
-
             @endif
         </section>
     @else
         <h3 class="text-center mt-5">Giỏ hàng của bạn đang trống !</h3>
     @endif
 @endsection
+
+

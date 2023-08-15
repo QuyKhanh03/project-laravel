@@ -9,7 +9,7 @@
                             <div class="auth-form" style="width: 600px">
                                 <div class="text-center mb-3">
                                     <a href="{{ route('fe.home.index') }}"><img
-                                            src="{{ asset('templates/client/img/logo/logo.png') }}" alt=""></a>
+                                            src="{{ asset('templates/fe/img/logo/logo.png') }}" alt=""></a>
                                 </div>
                                 <h4 class="text-center mb-4">Đăng nhập tài khoản của bạn</h4>
                                 <form action="{{ route('login') }}" method="post">

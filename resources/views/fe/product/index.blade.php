@@ -152,7 +152,7 @@
 
                 @endif
             </div>
-
+            @if(count($products)>0)
             <div class="pagination-wrap mt-30">
                 <ul>
                     @if ($products->currentPage() > 1)
@@ -168,6 +168,13 @@
                     @endif
                 </ul>
             </div>
+            @else
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="text-center h3">Không có sản phẩm nào!</div>
+                    </div>
+                </div>
+            @endif
 
         </div>
     </section>

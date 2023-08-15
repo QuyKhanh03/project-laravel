@@ -53,7 +53,7 @@ class CategoryController extends Controller
 
         $categories = Category::all();
         $brands = Brand::all();
-        return view('fe.category.index', compact('products', 'categories', 'brands'));
+        return view('fe.product.index', compact('products', 'categories', 'brands'));
 
     }
     public function index()

@@ -55,6 +55,10 @@ class OrderController extends Controller
 
         if(auth()->check()) {
             $user_id = auth()->user()->id;
+            User::query()->where('id', $user_id)->update([
+                'phone' => $request->phone,
+                'address' => $request->address,
+            ]);
         }else {
             $request->validate([
                 'email' => 'unique:users',
@@ -99,21 +103,24 @@ class OrderController extends Controller
                 'attribute' => $attribute,
             ]);
         }
-        session()->forget('cart');
-//        $data = [
-//            'name' => $name,
-//            'email' => $email,
-//            'phone' => $phone,
-//            'address' => $address,
-//            'note' => $note,
-//            'total' => $total,
-//            'order_code' => $order_code,
-//            'payment_method' => $payment_method,
-//            'order_date' => $order_date,
-//        ];
-//        $mailable = new SendMail($data);
-//        Mail::to($email)->queue($mailable);
 
+        $data = [
+            'name' => $request->name,
+            'email' => $request->email,
+            'phone' => $request->phone,
+            'address' => $request->address,
+            'note' => $request->note,
+            'total' => $request->total,
+            'code' => $order_code,
+            'payment' => $request->payment_method,
+            'order_date' => date('Y-m-d H:i:s'),
+            'status' => 0,
+            'cart' => $cart,
+        ];
+        $email = $request->email;
+        $mailable = new SendMail($data);
+        Mail::to($email)->queue($mailable);
+        session()->forget('cart');
         return redirect()->route('fe.home.index')->with('success', 'Đặt hàng thành công');
 
 
@@ -129,7 +136,14 @@ class OrderController extends Controller
             $vnp_TxnRef = $request->input('order_code'); //Mã đơn hàng. Trong thực tế Merchant cần insert đơn hàng vào DB và gửi mã này sang VNPAY
             $vnp_OrderInfo = 'Thanh toán đơn hàng';//tên sản phẩm
             $vnp_OrderType = 'billpayment';
+            //địa chỉ
+            $vnp_Bill_Mobile = $request->input('phone1');
+            $vnp_Bill_Address = $request->input('address1');
+            //số  điện thoại
+
+            //tổng tiền
             $vnp_Amount = $request->input('total')  * 100;
+//
 
             $vnp_Locale = 'vn';
             $vnp_BankCode = 'NCB';
@@ -148,6 +162,9 @@ class OrderController extends Controller
                 "vnp_OrderType" => $vnp_OrderType,
                 "vnp_ReturnUrl" => $vnp_Returnurl,
                 "vnp_TxnRef" => $vnp_TxnRef,
+                "vnp_Bill_Mobile" => $vnp_Bill_Mobile,
+                "vnp_Bill_Address" => $vnp_Bill_Address,
+//
             );
 
             if (isset($vnp_BankCode) && $vnp_BankCode != "") {
@@ -196,7 +213,11 @@ class OrderController extends Controller
             if(\auth()->check()) {
                 $order_code = $request->vnp_TxnRef;
                 $total = $request->vnp_Amount / 100;
-
+                //update user
+                User::query()->where('id', \auth()->user()->id)->update([
+                    'phone' => $request->vnp_Bill_Mobile,
+                    'address' => $request->vnp_Bill_Address,
+                ]);
                 Order::query()->create([
                     'code' => $order_code,
                     'user_id' => \auth()->user()->id,
