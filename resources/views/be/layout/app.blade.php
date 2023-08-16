@@ -57,7 +57,7 @@
             Nav header start
         ***********************************-->
     <div class="nav-header">
-        <a href="" class="brand-logo">
+        <a href="{{ route('admin.dashboard') }}" class="brand-logo">
             <img class="" style="width: 120px"  src="{{ asset('templates/fe/img/logo/fw_logo.png') }}" alt="">
         </a>
 

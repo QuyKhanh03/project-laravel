@@ -4,7 +4,7 @@
 <div class="deznav">
     <div class="deznav-scroll">
         <ul class="metismenu" id="menu">
-            <li><a class="ai-icon" href="" aria-expanded="false">
+            <li><a class="ai-icon" href="{{ route('admin.dashboard') }}" aria-expanded="false">
                     <i class="flaticon-381-networking"></i>
                     <span class="nav-text">Bảng điều khiển</span>
                 </a>
@@ -20,6 +20,16 @@
                     <li><a href="{{ route('categories.index') }}">Danh mục sản phẩm</a></li>
                 </ul>
             </li>
+            <li>
+                <a class="has-arrow ai-icon" href="javascript:void(0);" aria-expanded="false">
+                    <i class="fas fa-box-open"></i>
+                    <span class="nav-text">Quản đơn hàng</span>
+                </a>
+                <ul aria-expanded="false">
+                    <li><a href="{{ route('orders.index') }}">Danh sách đơn hàng</a></li>
+                </ul>
+            </li>
+
             <li>
 
                 <a class="ai-icon" href="{{ route('fe.home.index') }}" target="_blank">

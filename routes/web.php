@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\BE\OrderController;
 use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\AuthController;
@@ -86,4 +87,14 @@ Route::prefix('admin')
             Route::post('update-category/{id}','update')->name('categories.update');
             Route::get('delete-category/{id}','destroy')->name('categories.destroy');
         });
+//    orders
+        Route::controller(OrderController::class)->group(function (){
+            Route::get('orders','index')->name('orders.index');
+            Route::get('order/{id}','show')->name('orders.show');
+            Route::get('print/{id}','print')->name('orders.printOrder');
+            Route::put('update-order/{id}','update')->name('orders.update');
+            Route::put('accept-order/{id}','accept')->name('orders.accept');
+        });
+
+
     });
