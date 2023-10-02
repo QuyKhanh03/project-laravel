@@ -50,7 +50,7 @@
                                         <label for="image_primary" class="form-label">Hình ảnh nổi bật</label>
                                         <input type="file"  name="image_primary"  class="form-control" id="image_primary" accept="image/*" onchange="displayImage()">
                                         <input type="hidden" value="{{ $product->image_primary }}" name="image_primary_old">
-                                        <img style="width: 100px" id="uploadedImage" src="{{ asset('storage/images/products/'.$product->image_primary) }}" alt="Uploaded Image" />
+                                        <img style="width: 100px" id="uploadedImage" src="{{ asset(Storage::url($product->image_primary)) }}" alt="Uploaded Image" />
                                         @error('image_primary')
                                         <div class="text-danger">{{ $message }}</div>
                                         @enderror
@@ -66,7 +66,7 @@
                                             @endforeach" name="images_old[]" multiple>
                                         <div id="imageContainer" class="d-flex" style="width: 400px">
                                             @foreach($product_images as $image)
-                                                <img style="width: 100px" src="{{ asset('storage/images/products/'.$image->image) }}" alt="Uploaded Image" />
+                                                <img style="width: 100px" src="{{ asset(Storage::url($image->image)) }}" alt="Uploaded Image" />
                                             @endforeach
                                         </div>
                                     </div>

@@ -92,12 +92,12 @@
                 $('#form-category')[0].reset();
                 $('.text-danger').remove();
                 $('#id').val('');
-                $('.modal-title').html('Thêm thương hiệu');
+                $('.modal-title').html('Thêm danh mục');
             })
             $('body').on('click','.btn-edit',function(){
                 $('#form-category')[0].reset();
                 $('#modal-category').modal('show')
-                $('.modal-title').html('Sửa thương hiệu');
+                $('.modal-title').html('Sửa danh mục');
                 $('.text-danger').remove();
                 let id = $(this).attr('data-id');
                 $.ajax({

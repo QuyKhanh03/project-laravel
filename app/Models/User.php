@@ -17,15 +17,18 @@ class User extends Authenticatable
      *
      * @var array<int, string>
      */
+
     protected $fillable = [
         'name',
         'email',
         'password',
         'google_id',
+        'facebook_id',
         'phone',
         'address',
         'avatar',
-        'type',
+        'status',
+        'role_id',
     ];
 
     /**
@@ -47,4 +50,24 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
     ];
+
+    public function role()
+    {
+        return $this->belongsTo(Role::class);
+    }
+
+    public function hasPermission($permission)
+    {
+        return $this->role->permissions()->where('name', $permission)->first() ? true : false;
+    }
+
+    public function hasRole($role)
+    {
+        return $this->role->name == $role ? true : false;
+    }
+
+    public function hasGroup($group)
+    {
+        return $this->role->group == $group ? true : false;
+    }
 }

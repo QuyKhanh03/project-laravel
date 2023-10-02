@@ -28,11 +28,11 @@
                         <div class="shop-details-nav-wrap">
                             <ul class="nav nav-tabs" id="myTab" role="tablist">
                                 <li class="nav-item" role="presentation">
-                                    <a class="nav-link active" id="item-one-tab" data-toggle="tab" href="#item-one" role="tab" aria-controls="item-one" aria-selected="true"><img src="{{ asset('storage/images/products/'.$product->image_primary) }}" alt=""></a>
+                                    <a class="nav-link active" id="item-one-tab" data-toggle="tab" href="#item-one" role="tab" aria-controls="item-one" aria-selected="true"><img src="{{ asset(Storage::url($product->image_primary)) }}" alt=""></a>
                                 </li>
-                                @foreach($product_images as $item)
+                                @foreach($product_images as $index=> $item)
                                     <li class="nav-item" role="presentation">
-                                        <a class="nav-link" id="item-two-tab" data-toggle="tab" href="#item-{{ $item->id }}" role="tab" aria-controls="item-two" aria-selected="false"><img src="{{ asset('storage/images/products/'.$item->image) }}" alt=""></a>
+                                        <a class="nav-link" id="item-two-tab" data-toggle="tab" href="#item-{{ $item->id }}" role="tab" aria-controls="item-two" aria-selected="false"><img src="{{ asset(Storage::url($item->image)) }}" alt=""></a>
                                     </li>
                                 @endforeach
                             </ul>
@@ -41,13 +41,13 @@
                             <div class="tab-content" id="myTabContent">
                                 <div class="tab-pane fade show active" id="item-one" role="tabpanel" aria-labelledby="item-one-tab">
                                     <div class="shop-details-img">
-                                        <img style="width: 610px;height: 640px;" src="{{ asset('storage/images/products/'.$product->image_primary) }}" alt="">
+                                        <img style="width: 610px;height: 640px;" src="{{ asset(Storage::url($product->image_primary)) }}" alt="">
                                     </div>
                                 </div>
                                 @foreach($product_images as $item)
                                     <div class="tab-pane fade" id="item-{{$item->id}}" role="tabpanel" aria-labelledby="item-two-tab">
                                         <div class="shop-details-img">
-                                            <img style="width: 610px;height: 640px;" src="{{ asset('storage/images/products/'.$item->image) }}" alt="">
+                                            <img style="width: 610px;height: 640px;" src="{{ asset(Storage::url($item->image)) }}" alt="">
                                         </div>
                                     </div>
                                 @endforeach
@@ -170,7 +170,7 @@
                                     @else
                                         <div class="discount-tag new">New</div>
                                     @endif
-                                    <a style="width: 325px;height: 100%" href="{{ route('fe.product.show',$value->product_slug) }}"><img style="width: 320px;height: 100%" src="{{ asset('storage/images/products/'.$value->image_primary) }}" alt=""></a>
+                                    <a style="width: 325px;height: 100%" href="{{ route('fe.product.show',$value->product_slug) }}"><img style="width: 320px;height: 100%" src="{{ asset(Storage::url($value->image_primary)) }}" alt=""></a>
                                     <div class="product-overlay-action">
                                         <ul>
                                             <li><a href=""><i class="far fa-heart"></i></a></li>

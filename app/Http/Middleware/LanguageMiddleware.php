@@ -4,10 +4,9 @@ namespace App\Http\Middleware;
 
 use Closure;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 use Symfony\Component\HttpFoundation\Response;
 
-class CheckAdmin
+class LanguageMiddleware
 {
     /**
      * Handle an incoming request.
@@ -16,10 +15,8 @@ class CheckAdmin
      */
     public function handle(Request $request, Closure $next): Response
     {
-
-        if(Auth::check() && Auth::user()->role->name === 'super-admin' || Auth::user()->role->name === 'admin' || Auth::user()->role->name === 'manager' || Auth::user()->role->name === 'employee') {
-            return $next($request);
-        }
-        abort(401);
+        $locale = $request->session()->get('locale', config('app.locale'));
+        config(['app.locale' => $locale]);
+        return $next($request);
     }
 }

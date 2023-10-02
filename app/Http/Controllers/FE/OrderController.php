@@ -77,7 +77,6 @@ class OrderController extends Controller
 
             $user_id = User::query()->where('email', $request->email)->first()->id;
         }
-
         Order::query()->create([
             'code' => $order_code,
             'user_id' => $user_id,
@@ -87,7 +86,6 @@ class OrderController extends Controller
             'order_date' => date('Y-m-d H:i:s'),
             'total_price' => $request->total,
         ]);
-
         $order_id = Order::query()->where('code', $order_code)->first()->id;
         $cart = session()->get('cart');
         foreach ($cart as $key => $value) {
@@ -103,7 +101,6 @@ class OrderController extends Controller
                 'attribute' => $attribute,
             ]);
         }
-
         $data = [
             'name' => $request->name,
             'email' => $request->email,
@@ -242,6 +239,22 @@ class OrderController extends Controller
                         'attribute' => $attribute,
                     ]);
                 }
+                $data = [
+                    'name' => \auth()->user()->name,
+                    'email' => \auth()->user()->email,
+                    'phone' => $request->vnp_Bill_Mobile,
+                    'address' => $request->vnp_Bill_Address,
+                    'note' => '',
+                    'total' => $total,
+                    'code' => $order_code,
+                    'payment' => 'Thanh toán VNPAY',
+                    'order_date' => date('Y-m-d H:i:s'),
+                    'status' => 0,
+                    'cart' => $cart,
+                ];
+                $email = \auth()->user()->email;
+                $mailable = new SendMail($data);
+                Mail::to($email)->queue($mailable);
                 session()->forget('cart');
 //                $name = \auth()->user()->name;
 //                $email = \auth()->user()->email;

@@ -107,10 +107,8 @@
         </tbody>
     </table>
     <p>Đơn hàng của bạn đang được xử lý và sẽ được giao trong thời gian sớm nhất.</p>
-    <p>Chúng tôi đã tạo tài khoản của bạn cho website!</p>
-    <p>Để đăng nhập vào website, bạn có thể sử dụng email và mật khẩu sau:</p>
-    <p>Email: {{ $data['email'] }} <br>
-        Mật khẩu: 123456</p>
+
+
     <a href="{{ route('fe.home.index') }}" class="cta-button">Đến Adara</a>
 </div>
 

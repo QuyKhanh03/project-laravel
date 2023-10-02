@@ -134,7 +134,7 @@
                         <div class="col-xl-3 col-lg-4 col-sm-6">
                             <div class="new-arrival-item text-center mb-50">
                                 <div class="thumb mb-25">
-                                    <a href="{{ route('fe.product.show',$product->slug) }}"><img style="width: 270px;height: 235px" src="{{ asset('storage/images/products/'.$product->image_primary) }}" alt=""></a>
+                                    <a href="{{ route('fe.product.show',$product->slug) }}"><img style="width: 270px;height: 235px" src="{{ asset(Storage::url($product->image_primary)) }}" alt=""></a>
                                     <div class="product-overlay-action">
                                         <ul>
                                             <li><a href="cart.html"><i class="far fa-heart"></i></a></li>

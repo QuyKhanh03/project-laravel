@@ -9,20 +9,17 @@
                         <div class="row align-items-center">
                             <div class="col-lg-6">
                                 <div class="slider-content">
-                                    <h3 class="sub-title" data-animation-in="fadeInUp" data-delay-in=".2" data-duration-in="1.5">best offer !</h3>
-                                    <h2 class="title" data-animation-in="fadeInUp" data-delay-in=".4" data-duration-in="1.5">Giày thể thao</h2>
-                                    <a href="#" class="btn" data-animation-in="fadeInUp" data-delay-in=".8" data-duration-in="1.5">Mua ngay</a>
+                                    <h3 class="sub-title" data-animation-in="fadeInUp" data-delay-in=".2" data-duration-in="1.5">{{ __('ưu đãi tốt nhất !') }}</h3>
+                                    <h2 class="title" data-animation-in="fadeInUp" data-delay-in=".4" data-duration-in="1.5"></h2>
+                                    <a href="#" class="btn" data-animation-in="fadeInUp" data-delay-in=".8" data-duration-in="1.5">{{ __('Mua ngay') }}</a>
                                 </div>
                             </div>
                             <div class="col-lg-6">
                                 <div class="third-slider-img">
                                     <div class="img-shape" data-background="" data-animation-in="zoomIn"
                                          data-delay-in="1" data-duration-in="1.5"></div>
-
                                     <img src="{{ asset('templates/fe/img/slider/third_slider_img03.png') }}" alt="" class="main-img" data-animation-in="slideInRight2"
                                          data-delay-in="1" data-duration-in="1.5">
-
-
                                 </div>
                             </div>
                         </div>
@@ -35,7 +32,7 @@
                         <div class="row align-items-center">
                             <div class="col-lg-6">
                                 <div class="slider-content">
-                                    <h3 class="sub-title" data-animation-in="fadeInUp" data-delay-in=".2" data-duration-in="1.5">top deal !</h3>
+                                    <h3 class="sub-title" data-animation-in="fadeInUp" data-delay-in=".2" data-duration-in="1.5">{{ __('Sản phẩm hàng đầu') }}</h3>
                                     <h2 class="title" data-animation-in="fadeInUp" data-delay-in=".4" data-duration-in="1.5">athletes shoes</h2>
                                     <p data-animation-in="fadeInUp" data-delay-in=".6" data-duration-in="1.5">Get up to 50% off Today Only</p>
                                     <a href="shop-sidebar.html" class="btn" data-animation-in="fadeInUp" data-delay-in=".8" data-duration-in="1.5">Shop now</a>
@@ -142,7 +139,7 @@
             <div class="row justify-content-center">
                 <div class="col-xl-4 col-lg-6">
                     <div class="section-title title-style-two text-center mb-50">
-                        <h3 class="title">Sản phẩm của chúng tôi</h3>
+                        <h3 class="title">{{ __('Sản phẩm của chúng tôi') }}</h3>
                     </div>
                 </div>
             </div>
@@ -153,12 +150,12 @@
                 <div class="row no-gutters trending-product-grid">
                     <div class="col-2">
                         <div class="trending-products-list">
-                            <h5>Thương hiệu giày</h5>
+                            <h5>{{ __('Thương hiệu giày') }}</h5>
 
                             <ul class="nav nav-tabs" id="trendingTab" role="tablist">
                                 @foreach($brands as $key=>$value)
                                     <li class="nav-item" role="presentation">
-                                        <a class="nav-link {{ $key == 0 ? 'active' : '' }}" id="accessories-tab" data-toggle="tab" href="#tab{{ $value->id }}" role="tab" aria-controls="accessories" aria-selected="true">{{ $value->name }}</a>
+                                        <a class="nav-link {{ $key == 0 ? 'active' : '' }}" id="accessories-tab" data-toggle="tab" href="#tab{{ $value->id }}" role="tab" aria-controls="accessories" aria-selected="true">{{ __($value->name) }}</a>
                                     </li>
                                 @endforeach
 
@@ -177,47 +174,51 @@
                                         @php
                                             $products = \App\Models\Product::where('brand_id', $value->id)->get();
                                         @endphp
-                                        @foreach($products as $product)
-                                            <div class="col" style="width: 360px;height: 470px">
-                                                <div class="features-product-item" style="height: 100%;">
-                                                    <div class="features-product-thumb" style="height: 322px">
-                                                        @if($product->sale_off > 0)
-                                                            <div class="discount-tag">-{{ $product->sale_off }}%</div>
-                                                        @else
-                                                            <div class="discount-tag" style="background-color: #00c853">New</div>
-                                                        @endif
-                                                        <a href="{{ route('fe.product.show',$product->slug) }}">
-                                                            <img style="width: 215px;height: 100%" src="{{ asset('storage/images/products/'.$product->image_primary) }}" alt="">
-                                                        </a>
-                                                        <div class="product-overlay-action">
-                                                            <ul>
-                                                                <li><a href=""><i class="far fa-heart"></i></a></li>
-                                                                <li><a href=""><i class="far fa-eye"></i></a></li>
-                                                            </ul>
+                                        @if(count($products) > 0)
+                                            @foreach($products as $product)
+                                                <div class="col" style="width: 360px;height: 470px">
+                                                    <div class="features-product-item" style="height: 100%;">
+                                                        <div class="features-product-thumb" style="height: 322px">
+                                                            @if($product->sale_off > 0)
+                                                                <div class="discount-tag">-{{ $product->sale_off }}%</div>
+                                                            @else
+                                                                <div class="discount-tag" style="background-color: #00c853">New</div>
+                                                            @endif
+                                                            <a href="{{ route('fe.product.show',$product->slug) }}">
+                                                                <img style="width: 215px;height: 100%" src="{{ asset(Storage::url($product->image_primary)) }}" alt="">
+                                                            </a>
+                                                            <div class="product-overlay-action">
+                                                                <ul>
+                                                                    <li><a href=""><i class="far fa-heart"></i></a></li>
+                                                                    <li><a href=""><i class="far fa-eye"></i></a></li>
+                                                                </ul>
+                                                            </div>
                                                         </div>
-                                                    </div>
-                                                    <div class="features-product-content" style="height: 150px">
-                                                        <div class="rating">
-                                                            <i class="far fa-star"></i>
-                                                            <i class="far fa-star"></i>
-                                                            <i class="far fa-star"></i>
-                                                            <i class="far fa-star"></i>
-                                                            <i class="far fa-star"></i>
+                                                        <div class="features-product-content" style="height: 150px">
+                                                            <div class="rating">
+                                                                <i class="far fa-star"></i>
+                                                                <i class="far fa-star"></i>
+                                                                <i class="far fa-star"></i>
+                                                                <i class="far fa-star"></i>
+                                                                <i class="far fa-star"></i>
+                                                            </div>
+                                                            <h5><a href="{{ route('fe.product.show',$product->slug) }}">{{ $product->name }}</a></h5>
+                                                            @if($product->sale_off > 0)
+                                                                <p class="price"><del>{{ number_format($product->price,0,',','.') }} VNĐ</del> {{ number_format($product->price - ($product->price * $product->sale_off / 100), 0, ',', '.') }} VNĐ</p>
+
+                                                            @else
+                                                                <p class="price">{{ number_format($product->price, 0, ',', '.') }} VNĐ</p>
+
+                                                            @endif
+
                                                         </div>
-                                                        <h5><a href="{{ route('fe.product.show',$product->slug) }}">{{ $product->name }}</a></h5>
-                                                        @if($product->sale_off > 0)
-                                                            <p class="price"><del>{{ number_format($product->price,0,',','.') }} VNĐ</del> {{ number_format($product->price - ($product->price * $product->sale_off / 100), 0, ',', '.') }} VNĐ</p>
-
-                                                        @else
-                                                            <p class="price">{{ number_format($product->price, 0, ',', '.') }} VNĐ</p>
-
-                                                        @endif
-
+                                                        <div class="features-product-cart"><a href="{{ route('fe.product.show',$product->slug) }}">Xem chi tiết</a></div>
                                                     </div>
-                                                    <div class="features-product-cart"><a href="{{ route('fe.product.show',$product->slug) }}">Xem chi tiết</a></div>
                                                 </div>
-                                            </div>
-                                        @endforeach
+                                            @endforeach
+                                        @else
+                                            <h4 class="mt-5">{{ __('Không có sản phẩm nào') }}</h4>
+                                        @endif
                                     </div>
                                 </div>
                             @endforeach

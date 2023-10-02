@@ -57,7 +57,7 @@
                                 <td>{{ ++$key }}</td>
                                 <td>{{ $product->name }}</td>
                                 <td>
-                                    <img src="{{ asset('storage/images/products/'.$product->image_primary) }}" alt="" width="50px">
+                                    <img src="{{ asset(Storage::url($product->image_primary)) }}" alt="" width="50px">
                                 </td>
                                 <td>{{ number_format($product->price) }}đ</td>
                                 <td>{{ $product->total_quantity }}</td>

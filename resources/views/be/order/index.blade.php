@@ -2,7 +2,12 @@
 @section('content')
     <div class="container-fluid">
         <div class="row page-titles mx-0">
-            <h3>Quản lý đơn hàng</h3>
+            <div class="col">
+                <h3>Quản lý đơn hàng</h3>
+            </div>
+            <div class="col">
+                <a href="{{ route('orders.create') }}" class="btn btn-primary float-right">Tạo mới đơn hàng</a>
+            </div>
         </div>
         <div class="row">
             <div class="col">
@@ -33,7 +38,7 @@
                                 @elseif ($order->status == 2)
                                     <span class="badge badge-info">Đang vận chuyển</span>
                                 @elseif ($order->status == 3)
-                                    <span class="badge badge-success">Đã giao hàng</span>
+                                    <span class="badge badge-success">Đã nhận hàng</span>
                                 @elseif ($order->status == 4)
                                     <span class="badge badge-danger">Đã hủy</span>
                                 @endif

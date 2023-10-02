@@ -52,7 +52,7 @@
                 <tr>
                     <td>{{ $key + 1 }}</td>
                     <td>
-                        <img src="{{ asset('storage/images/products/'.$value->image_primary) }}" alt="" width="80px">
+                        <img src="{{ asset('uploads/'.$value->image_primary) }}" alt="" width="80px">
                     </td>
                     <td>{{ $value->name }}</td>
                     <td>{{ $value->quantity }}</td>

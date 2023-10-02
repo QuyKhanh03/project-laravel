@@ -43,7 +43,8 @@
                                             $total += $value['product_price'] * $value['product_quantity'];
                                         @endphp
                                         <tr data-id="{{ $value['key'] }}">
-                                            <td class="product-thumbnail"><a href="{{ route('fe.product.show',$value['product_id']) }}"><img src="{{ asset('storage/images/products/'.$value['product_image']) }}" alt=""></a></td>
+
+                                            <td class="product-thumbnail"><a href="{{ route('fe.product.show',$value['product_id']) }}"><img src="{{ asset(Storage::url($value['product_image'])) }}" alt=""></a></td>
                                             <td class="product-name">
                                                 <h4><a href="{{ route('fe.product.show',$value['product_id']) }}">{{ $value['product_name'] }}</a></h4>
                                             </td>

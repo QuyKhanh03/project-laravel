@@ -60,7 +60,7 @@
 
 
 <!-- Scroll-top -->
-<button class="scroll-top scroll-to-target" data-target="html">
+<button class="scroll-top scroll-to-target mx-5" data-target="html">
     <i class="fas fa-angle-up"></i>
 </button>
 <!-- Scroll-top-end-->
@@ -71,35 +71,7 @@
 
     <!-- breadcrumb-area-end -->
     @yield('content')
-    <!-- shoes-banner-area -->
-    {{--    <section class="shoes-banner-area">--}}
-    {{--        <div class="container">--}}
-    {{--            <div class="shoes-banner-active">--}}
-    {{--                <div class="shoes-banner-bg" data-background="{{ asset('templates/fe/img/bg/shoes-banner_bg.jpg') }}">--}}
-    {{--                    <div class="row">--}}
-    {{--                        <div class="col-12">--}}
-    {{--                            <div class="shoes-banner-content">--}}
-    {{--                                <h6>Athletes Shoes</h6>--}}
-    {{--                                <h2>9 Best <span>Shoes for</span> Standing All Day Review 2020</h2>--}}
-    {{--                            </div>--}}
-    {{--                        </div>--}}
-    {{--                    </div>--}}
-    {{--                </div>--}}
-    {{--                <div class="shoes-banner-bg" data-background="{{ asset('templates/fe/img/bg/shoes-banner_bg.jpg') }}">--}}
-    {{--                    <div class="row">--}}
-    {{--                        <div class="col-12">--}}
-    {{--                            <div class="shoes-banner-content">--}}
-    {{--                                <h6>Athletes Shoes</h6>--}}
-    {{--                                <h2>3 Best <span>Shoes for</span> Standing All Day Review 2021</h2>--}}
-    {{--                            </div>--}}
-    {{--                        </div>--}}
-    {{--                    </div>--}}
-    {{--                </div>--}}
 
-    {{--            </div>--}}
-    {{--        </div>--}}
-    {{--    </section>--}}
-    <!-- shoes-banner-area-end -->
 
     <!-- promo-services -->
     <section class="promo-services pt-70 pb-25">
@@ -109,8 +81,8 @@
                     <div class="promo-services-item mb-40">
                         <div class="icon"><img src="{{ asset('templates/fe/img/icon/promo_icon01.png') }}" alt=""></div>
                         <div class="content">
-                            <h6>payment & delivery</h6>
-                            <p>Delivered, when you receive arrives</p>
+                            <h6>{{ __('thanh toán và giao hàng') }}</h6>
+                            <p>{{ __('Đã giao hàng, khi bạn nhận được đã đến lúc thanh toán') }}</p>
                         </div>
                     </div>
                 </div>
@@ -118,8 +90,8 @@
                     <div class="promo-services-item mb-40">
                         <div class="icon"><img src="{{ asset('templates/fe/img/icon/promo_icon02.png') }}" alt=""></div>
                         <div class="content">
-                            <h6>Return Product</h6>
-                            <p>Retail, a Product Return Process</p>
+                            <h6>{{ __('Hoàn trả') }}</h6>
+                            <p>{{ __('Bán lẻ, quy trình hoàn trả sản phẩm') }}</p>
                         </div>
                     </div>
                 </div>
@@ -127,8 +99,8 @@
                     <div class="promo-services-item mb-40">
                         <div class="icon"><img src="{{ asset('templates/fe/img/icon/promo_icon03.png') }}" alt=""></div>
                         <div class="content">
-                            <h6>money back guarantee</h6>
-                            <p>Options Including 24/7</p>
+                            <h6>{{ __('Đảm bảo hoàn tiền') }}</h6>
+                            <p>{{ __('Tùy chọn Bao gồm hỗ trợ 24/7 ') }}</p>
                         </div>
                     </div>
                 </div>
@@ -136,8 +108,8 @@
                     <div class="promo-services-item mb-40">
                         <div class="icon"><img src="{{ asset('templates/fe/img/icon/promo_icon04.png') }}" alt=""></div>
                         <div class="content">
-                            <h6>Quality support</h6>
-                            <p>Support Options Including 24/7</p>
+                            <h6>{{ __('Đảm bảo chất lượng') }}</h6>
+                            <p>{{ __('Tùy chọn Bao gồm hỗ trợ 24/7 ') }}</p>
                         </div>
                     </div>
                 </div>
@@ -212,7 +184,36 @@
     <!-- instagram-post-area-end -->
 </main>
 <!-- main-area-end -->
+<!-- Messenger Plugin chat Code -->
+<div id="fb-root"></div>
 
+<!-- Your Plugin chat code -->
+<div id="fb-customer-chat" class="fb-customerchat" >
+</div>
+
+<script>
+    var chatbox = document.getElementById('fb-customer-chat');
+    chatbox.setAttribute("page_id", "117841384750806");
+    chatbox.setAttribute("attribution", "biz_inbox");
+</script>
+
+<!-- Your SDK code -->
+<script>
+    window.fbAsyncInit = function() {
+        FB.init({
+            xfbml            : true,
+            version          : 'v17.0'
+        });
+    };
+
+    (function(d, s, id) {
+        var js, fjs = d.getElementsByTagName(s)[0];
+        if (d.getElementById(id)) return;
+        js = d.createElement(s); js.id = id;
+        js.src = 'https://connect.facebook.net/vi_VN/sdk/xfbml.customerchat.js';
+        fjs.parentNode.insertBefore(js, fjs);
+    }(document, 'script', 'facebook-jssdk'));
+</script>
 
 <!-- footer-area -->
 <footer class="dark-bg pt-55 pb-80">

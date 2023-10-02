@@ -15,14 +15,17 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->string('email')->unique();
-            $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
-            $table->rememberToken();
             $table->string('phone')->nullable();
             $table->text('address')->nullable();
             $table->string('avatar')->nullable();
             $table->string('google_id')->nullable();
-            $table->string('type')->default('user');
+            $table->string('facebook_id')->nullable();
+            $table->string('status')->default('inactive');
+            $table->unsignedBigInteger('role_id')->nullable();
+            $table->foreign('role_id')->references('id')->on('roles')->onDelete('cascade'); // 1 user chỉ có 1 role
+            $table->timestamp('email_verified_at')->nullable();
+            $table->rememberToken();
             $table->timestamps();
         });
     }

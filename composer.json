@@ -12,6 +12,7 @@
         "laravel/sanctum": "^3.2",
         "laravel/socialite": "^5.8",
         "laravel/tinker": "^2.8",
+        "spatie/laravel-permission": "^5.11",
         "unisharp/laravel-filemanager": "^2.6",
         "yajra/laravel-datatables-oracle": "^10.7"
     },

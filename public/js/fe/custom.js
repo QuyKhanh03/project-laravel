@@ -14,7 +14,7 @@ $(document).ready(function () {
                         $.each(results, function(key, value){
                             $('#search-results').append('' +
                                 '<li class="mb-3"><a class="h6 " href="/san-pham/'+value.slug+'">' +
-                                '<img style="width: 45px;height: 45px" src="/storage/images/products/'+value.image_primary+'" alt="'+value.name+'" class="img-fluid">' +
+                                '<img style="width: 45px;height: 45px" src="/uploads/'+value.image_primary+'" alt="'+value.name+'" class="img-fluid">' +
                                 ' '+value.name+'</a></li> ')
                         })
                     } else {

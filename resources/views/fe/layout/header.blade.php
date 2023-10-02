@@ -13,17 +13,19 @@
                             </div>
                             <div class="navbar-wrap main-menu d-none d-lg-flex">
                                 <ul class="navigation">
-                                    <li class="active menu-item-has-children has--mega--menu"><a href="{{ route('fe.home.index') }}">Trang Chủ</a></li>
+                                    <li class="active menu-item-has-children has--mega--menu"><a href="{{ route('fe.home.index') }}">
+                                            {{ __('Trang Chủ') }}
+                                        </a></li>
                                     @php
                                         $categories_header = App\Http\Controllers\FE\CategoryController::getCategory();
                                         $brands_header = App\Http\Controllers\FE\CategoryController::getBrand();
                                     @endphp
                                     @if($categories_header)
                                         @foreach($categories_header as $category)
-                                            <li class="active menu-item-has-children has--mega--menu"><a href="{{ route('fe.category.getProductBySlug',$category->slug) }}">{{ $category->name }}</a></li>
+                                            <li class="active menu-item-has-children has--mega--menu"><a href="{{ route('fe.category.getProductBySlug',$category->slug) }}">{{ __($category->name) }}</a></li>
                                         @endforeach
 
-                                        <li class="menu-item-has-children"><a href="{{ route('fe.product.index') }}">Sản Phẩm</a>
+                                        <li class="menu-item-has-children"><a href="{{ route('fe.product.index') }}"> {{ __('Sản Phẩm') }} </a>
 
 
                                             <ul class="submenu">
@@ -31,14 +33,13 @@
                                                 @endif
                                                 @if($brands_header)
                                                     @foreach($brands_header as $brand)
-                                                        <li><a href="{{ route('fe.brand.getProductBySlug',$brand->slug) }}">{{ $brand->name }}</a></li>
+                                                        <li><a href="{{ route('fe.brand.getProductBySlug',$brand->slug) }}">{{ __($brand->name) }}</a></li>
                                                     @endforeach
                                                 @endif
                                             </ul>
                                         </li>
-                                        <li><a href="about-us.html">Hướng dẫn mua hàng</a></li>
 
-                                        <li><a href="contact.html">Liên hệ</a></li>
+                                        <li><a href="#">{{ __('Liên Hệ') }}</a></li>
                                 </ul>
                             </div>
                             <div class="header-action d-none d-md-block">
@@ -72,7 +73,7 @@
                                                     @endphp
                                                     <li class="d-flex align-items-start">
                                                         <div class="cart-img">
-                                                            <a href="#"><img src="{{ asset('storage/images/products/'.$value['product_image']) }}" alt=""></a>
+                                                            <a href="#"><img src="{{ asset(Storage::url($value['product_image'])) }}" alt=""></a>
                                                         </div>
                                                         <div class="cart-content">
                                                             <h4><a href="#">{{ $value['product_name'] }}</a></h4>
@@ -99,19 +100,19 @@
 
                                                 <li>
                                                     <div class="total-price">
-                                                        <span class="f-left">Tổng :</span>
+                                                        <span class="f-left">{{ __('Tổng') }} :</span>
                                                         <span class="f-right">{{ number_format($total, 0, ',', '.') }} VNĐ</span>
                                                     </div>
                                                 </li>
                                                 <li>
                                                     <div class="checkout-link">
-                                                        <a href="{{ route('client.cart.index') }}">Giỏ hàng</a>
-                                                        <a class="black-color" href="{{ route('client.order.index') }}">Thanh toán</a>
+                                                        <a href="{{ route('client.cart.index') }}">{{ __('Giỏ hàng') }}</a>
+                                                        <a class="black-color" href="{{ route('client.order.index') }}">{{ __('Thanh toán') }}</a>
                                                     </div>
                                                 </li>
 
                                             @else
-                                                <h5>Giỏ hàng trống !</h5>
+                                                <h5>{{ __('Giỏ hàng trống !') }}</h5>
                                             @endif
                                         </ul>
                                     </li>
@@ -120,7 +121,7 @@
                                         <!-- Authentication Links -->
                                         @guest
                                             <li class="nav-item">
-                                                <a class="nav-link text-white" href="{{ route('login') }}">{{ __('Đăng nhập') }}</a>
+                                                <a class="nav-link text-white" href="{{ route('login') }}">{{ __('Đăng Nhập') }}</a>
                                             </li>
 
                                         @endguest
@@ -132,6 +133,7 @@
                                                 </a>
 
                                                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                                                    <a href="" class="dropdown-item" >Hồ sơ</a>
                                                     <a class="dropdown-item" href="{{ route('logout') }}"
                                                        onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
@@ -142,14 +144,31 @@
                                                           style="display: none;">
                                                         @csrf
                                                     </form>
+
                                                 </div>
                                             </li>
                                         @endauth
                                     </ul>
+
+                                    <li class="nav-item dropdown">
+                                        <a id="navbarDropdown" class="nav-link dropdown-toggle text-white" href="#" role="button"
+                                           data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                                            <i
+                                                class="fas fa-globe-asia"
+                                            ></i>
+                                        </a>
+
+                                        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                                            <a href="{{ route('fe.language.index',['vi']) }}" class="dropdown-item" >{{ __('Tiếng Việt') }}</a>
+                                            <a href="{{ route('fe.language.index',['en']) }}" class="dropdown-item" >{{ __('Tiếng Anh') }}</a>
+                                        </div>
+                                    </li>
+
                                 </ul>
                             </div>
                         </nav>
                     </div>
+
                     <!-- Mobile Menu  -->
                     <div class="mobile-menu">
                         <div class="close-btn"><i class="flaticon-targeting-cross"></i></div>
@@ -159,16 +178,21 @@
                             <div class="menu-outer">
                                 <ul class="navigation">
                                     <li class="active menu-item-has-children"><a href="{{ route('fe.home.index') }}">Home</a></li>
-                                    <li class="menu-item-has-children"><a href="#">Shop</a>
+                                    @if($categories_header)
+                                        @foreach($categories_header as $category)
+                                            <li ><a href="{{ route('fe.category.getProductBySlug',$category->slug) }}">{{ $category->name }}</a></li>
+                                        @endforeach
+                                    @endif
+                                    <li class="menu-item-has-children"><a href="{{ route('fe.product.index') }}">Sản phẩm</a>
                                         <ul class="submenu">
-                                            <li><a href="shop.html">Shop Page</a></li>
-                                            <li><a href="shop-sidebar.html">Shop Sidebar</a></li>
-                                            <li><a href="shop-details.html">Shop Details</a></li>
-                                            <li><a href="cart.html">Cart Page</a></li>
-                                            <li><a href="cart.html">Checkout Page</a></li>
+                                            @if($brands_header)
+                                                @foreach($brands_header as $brand)
+                                                    <li><a href="{{ route('fe.brand.getProductBySlug',$brand->slug) }}">{{ $brand->name }}</a></li>
+                                                @endforeach
+                                            @endif
                                         </ul>
                                     </li>
-                                    <li><a href="about-us.html">About Us</a></li>
+                                    <li><a href="#">About Us</a></li>
                                     <li class="menu-item-has-children"><a href="#">blog</a>
                                         <ul class="submenu">
                                             <li><a href="blog.html">Our Blog</a></li>
@@ -176,17 +200,11 @@
                                         </ul>
                                     </li>
                                     <li><a href="contact.html">Contact Us</a></li>
+                                    <li><a href="{{ route('fe.auth.login') }}">Đăng nhập</a></li>
                                 </ul>
                             </div>
-                            <div class="social-links">
-                                <ul class="clearfix">
-                                    <li><a href="#"><span class="fab fa-twitter"></span></a></li>
-                                    <li><a href="#"><span class="fab fa-facebook-square"></span></a></li>
-                                    <li><a href="#"><span class="fab fa-pinterest-p"></span></a></li>
-                                    <li><a href="#"><span class="fab fa-instagram"></span></a></li>
-                                    <li><a href="#"><span class="fab fa-youtube"></span></a></li>
-                                </ul>
-                            </div>
+{{--                  login          --}}
+
                         </nav>
                     </div>
                     <div class="menu-backdrop"></div>

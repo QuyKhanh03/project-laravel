@@ -15,21 +15,21 @@
                                 <form action="{{ route('login') }}" method="post">
                                     @csrf
                                     <div class="form-group">
-                                        <label class="mb-1"><strong>Email</strong></label>
-                                        <input type="email" name="email" class="form-control" @error('email')  is-invalid
-                                               @enderror value="{{ old('email') }}" required autocomplete="email"
-                                               autofocus>
+                                        <label for="email" class="mb-1"><strong>Email</strong></label>
+                                        <input id="email" type="email" name="email" class="form-control @error('email') is-invalid @enderror"
+                                                value="{{ old('email') }}"  autocomplete="email"
+                                               >
                                         @error('email')
                                         <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
-                                    </span>
+                                        </span>
                                         @enderror
                                     </div>
                                     <div class="form-group">
-                                        <label class="mb-1"><strong>Mật khẩu</strong></label>
+                                        <label for="password" class="mb-1"><strong>Mật khẩu</strong></label>
                                         <input id="password" type="password"
                                                class="form-control @error('password') is-invalid @enderror"
-                                               name="password" required autocomplete="current-password">
+                                               name="password"  autocomplete="current-password">
 
                                         @error('password')
                                         <span class="invalid-feedback" role="alert">
@@ -63,12 +63,18 @@
                                 </form>
                                 <div class="new-account mt-3 row">
                                     <div class="col">
-                                        <p>Bạn chưa có tài khoản ? <a  style="color: #ff5400" href="#">Đăng
+                                        <p>Bạn chưa có tài khoản ? <a  style="color: #ff5400" href="{{ route('fe.auth.register') }}">Đăng
                                                 Ký</a></p>
                                     </div>
-                                    <div class="col flex items-center justify-end  float-end">
+                                </div>
+                                <hr>
+                                <div class="mt-3 row">
+                                    <div class="col">
                                         <a href="{{ route('google.redirect') }}">
-                                            <img src="https://developers.google.com/identity/images/btn_google_signin_dark_normal_web.png" style="margin-left: 3em;">
+                                            <img src="https://one.systemonesoftware.com/images/btn_google_signin_dark_normal_web@2x.png" style="margin-left: 3em;height: 45px">
+                                        </a>
+                                        <a href="{{ route('facebook.redirect') }}">
+                                            <img src="https://one.systemonesoftware.com/images/btn_facebook_signin_dark_normal_web@2x.png" style="margin-left: 3em;height: 45px">
                                         </a>
                                     </div>
                                 </div>

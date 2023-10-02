@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\BE;
 
 use App\Http\Controllers\Controller;
+use App\Models\Product;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -86,4 +87,13 @@ class OrderController extends Controller
         $order->save();
         return redirect()->route('orders.index')->with('success', 'Cập nhật trạng thái đơn hàng thành công');
     }
+    public function create() {
+        return view('be.order.create');
+    }
+    public function store(Request $request){
+        $request->validate([
+
+        ]);
+    }
+
 }

@@ -164,7 +164,7 @@
                                             <div class="col-sm-6">
                                                 <div class="form-grp">
                                                     <label for="phone">Số điện thoại<span>*</span></label>
-                                                    <input type="text" class="phone" id="phone" value="{{ old('phone') }}" name="phone">
+                                                    <input type="text" class="phone" id="phone" value="{{ auth()->user()->phone }}" name="phone">
                                                     @error('phone')
                                                     <span class="text-danger">{{ $message }}</span>
                                                     @enderror
@@ -173,7 +173,7 @@
                                             <div class="col-sm-6">
                                                 <div class="form-grp">
                                                     <label for="address">Địa chỉ<span>*</span></label>
-                                                    <input type="text" id="address" class="address" value="{{ old('address') }}" name="address">
+                                                    <input type="text" id="address" class="address" value="{{ auth()->user()->address }}" name="address">
                                                     @error('address')
                                                     <span class="text-danger">{{ $message }}</span>
                                                     @enderror

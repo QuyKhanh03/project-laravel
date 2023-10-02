@@ -31,6 +31,18 @@
             </li>
 
             <li>
+                <a class="has-arrow ai-icon" href="javascript:void(0);" aria-expanded="false">
+                    <i class="fas fa-users"></i>
+                    <span class="nav-text">Quản lý người dùng</span>
+                </a>
+                <ul aria-expanded="false">
+                    <li><a href="{{ route('users.index') }}">Danh sách người dùng</a></li>
+                    <li><a href="{{ route('roles.index') }}">Danh sách vai trò</a></li>
+                    <li><a href="{{ route('permissions.index') }}">Danh sách quyền</a></li>
+                </ul>
+            </li>
+
+            <li>
 
                 <a class="ai-icon" href="{{ route('fe.home.index') }}" target="_blank">
                     <i class="flaticon-381-enter"></i>

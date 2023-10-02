@@ -33,6 +33,7 @@
 
 <body>
 
+
 <!--*******************
         Preloader start
     ********************-->
@@ -51,7 +52,14 @@
 <!--**********************************
         Main wrapper start
     ***********************************-->
+
+
+
 <div id="main-wrapper">
+
+
+
+
 
     <!--**********************************
             Nav header start
@@ -70,7 +78,6 @@
     <!--**********************************
             Nav header end
         ***********************************-->
-
 
     <!--**********************************
             Header start
@@ -184,8 +191,9 @@
                         </li>
                         <li class="nav-item dropdown header-profile">
                             <a class="nav-link" href="javascript:void(0);" role="button" data-bs-toggle="dropdown">
-                                <img src="{{ asset('templates/be/images/profile/pic1.jpg') }}" width="20" alt=""/>
+                                <img src="{{ asset(auth()->user()->avatar) ?? asset('templates/be/images/profile/pic1.jpg')  }}" width="20" alt=""/>
                             </a>
+
                             <div class="dropdown-menu dropdown-menu-end">
                                 <a href="app-profile.html" class="dropdown-item ai-icon">
                                     <svg id="icon-user1" xmlns="http://www.w3.org/2000/svg" class="text-primary"
@@ -254,6 +262,7 @@
         ***********************************-->
 
     @include('be.layout.sidebar')
+
 
     <!--**********************************
             EventList
@@ -352,6 +361,7 @@
     <div class="content-body">
         @yield('content')
     </div>
+
     <!--**********************************
             Content body end
         ***********************************-->
@@ -365,6 +375,8 @@
             <p>Bản quyền © {{ date('Y') }} Phạm Ngọc Khánh - Luyện Huy Hướng </p>
         </div>
     </div>
+
+
     <!--**********************************
             Footer end
         ***********************************-->
@@ -401,7 +413,7 @@
 <script src="{{ asset('templates/be/js/custom.min.js') }}"></script>
 <script src="{{ asset('templates/be/js/deznav-init.js') }}"></script>
 <script src="{{ asset('templates/be/js/demo.js') }}"></script>
-<script src="{{ asset('templates/be/js/styleSwitcher.js') }}"></script>
+{{--<script src="{{ asset('templates/be/js/styleSwitcher.js') }}"></script>--}}
 <!-- Thay thế {YOUR_API_KEY} bằng khóa API của bạn từ trang web TinyMCE -->
 <script src="https://cdn.tiny.cloud/1/gwhdtg51gzp1y2m3vnlek784pp7o91u2h0wkpv67qsvqqyv9/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
 <script src="{{ asset('js/be/config.js') }}"></script>

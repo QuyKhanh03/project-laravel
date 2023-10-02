@@ -16,7 +16,11 @@ class UserSeeder extends Seeder
             'name' => 'admin',
             'email' => 'admin@gmail.com',
             'password' => bcrypt('123456'),
-            'type' => 'admin',
+            'phone' => '0123456789',
+            'address' => 'Ha Noi',
+            'avatar' => 'https://pbs.twimg.com/media/F2AvhKGaAAIK5ON?format=jpg&name=4096x4096',
+            'status' => 'active',
+            'role_id' => 6,
         ];
         \App\Models\User::create($data);
     }
